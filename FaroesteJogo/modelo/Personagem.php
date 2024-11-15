@@ -4,11 +4,7 @@ class Personagem{
 
     private string $nome;
     private int $vida;
-    private int $dano;
     private string $arma;
-    private float $dinheiro;
-
-    
 
     /**
      * Get the value of nome
@@ -47,24 +43,6 @@ class Personagem{
     }
 
     /**
-     * Get the value of dano
-     */
-    public function getDano(): int
-    {
-        return $this->dano;
-    }
-
-    /**
-     * Set the value of dano
-     */
-    public function setDano(int $dano): self
-    {
-        $this->dano = $dano;
-
-        return $this;
-    }
-
-    /**
      * Get the value of arma
      */
     public function getArma(): string
@@ -82,22 +60,5 @@ class Personagem{
         return $this;
     }
 
-    /**
-     * Get the value of dinheiro
-     */
-    public function getDinheiro(): float
-    {
-        return $this->dinheiro;
-    }
-
-    /**
-     * Set the value of dinheiro
-     */
-    public function setDinheiro(float $dinheiro): self
-    {
-        $this->dinheiro = $dinheiro;
-
-        return $this;
-    }
 }
 

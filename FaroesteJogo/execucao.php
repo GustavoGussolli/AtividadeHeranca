@@ -1,59 +1,58 @@
 <?php
-require_once('modelo/Bandido.php');
-require_once('modelo/Duelo.php');
+
 require_once('modelo/Personagem.php');
+require_once('modelo/Bandido.php');
 require_once('modelo/Procurador.php');
 
 menu();
-function menu(){
+function menu()
+{
 
     $arrayPersonagem = array();
-    
+
     do {
-    echo "1- Selecionar Classe.\n";
-    echo "2- Creditos.\n";
-    echo "3- Iniciar.\n";
-    echo "0- Sair.\n";
-    $opcao = readline("Informe uma Opção:");
-    
+        echo "1- Criar Personagem.\n";
+        echo "2- Iniciar.\n";
+        echo "3- Creditos.\n";
+        echo "0- Sair.\n";
+        $opcao = readline("Informe uma Opção:");
+
         switch ($opcao) {
+
             case '0':
-                echo "Saindo...\n";
-            break;
-            
+                echo "Programa Encerrado!\n";
+                break;
+
             case '1':
-                system('clear');
-                array_push($arrayPersonagem, selecionarPersonagem());
-                system('clear');
-            break;
-    
+                array_push($arrayPersonagem, criarPersonagem());
+                break;
+
             case '2':
+                iniciar($arrayPersonagem);
+                break;
+
+            case '3':
+
                 system('clear');
                 echo "Feito por:\n";
                 echo "Gustavo Nascimento\n";
                 echo "Micael Menegassi Silva\n";
                 readline('Pressione Enter Para Continuar.');
-                system('clear');
-            break;
+                break;
 
-            case '3':
-                system('clear');
-                iniciar($arrayPersonagem);
-                system('clear');
-            break;
-    
             default:
                 system('clear');
-                echo "Digite Uma Opção Valida\n";
+                echo "Digite Uma Opção Valida!\n";
                 readline('Pressione Enter Para Continuar.');
-                system('clear');
-            break;
+                break;
         }
     } while ($opcao != '0');
-    
+
 }
 
-function selecionarPersonagem(){
+function criarPersonagem()
+{
+    echo "Escolha Uma Classe: \n";
     echo "1- Procurador.\n";
     echo "2- Bandido.\n";
     $opcao = readline("Informe uma Opção:");
@@ -62,17 +61,16 @@ function selecionarPersonagem(){
             $personagem = new Procurador();
             $personagem->setNome(readline("Informe o nome: "));
             $personagem->setVida(100);
-            $personagem->setDano(10);
-            $personagem->setHonra(readline("Informe a Honra do Procurador: "));
-            $personagem->setDinheiro(100);
-            
-            do{
-                echo "1- Colt Single Action Army. \n";
-                echo "2- Remington Model. \n";
+
+            do {
+
+                echo "Escolha Uma Arma: \n";
+                echo "1- Colt Single Action Army (Dano: 15).\n";
+                echo "2- Remington Model (Dano: 12).\n";
 
                 $opcaoArma = readline("Informe uma Opção:");
 
-                switch ($opcaoArma){
+                switch ($opcaoArma) {
                     case '1':
                         $personagem->setArma("Colt Single Action Army");
                         break;
@@ -80,54 +78,29 @@ function selecionarPersonagem(){
                     case '2':
                         $personagem->setArma("Remington Model");
                         break;
-                
+
                     default:
                         echo "Opção Invalida! \n";
                         break;
                 }
-                
+
             } while ($opcaoArma != '1' && $opcaoArma != '2');
 
-            do {
-                echo "Você tem ". $personagem->getDinheiro() . " de Dinheiro.\n";
-                echo "1- Sim Voce Diminuira o seu Dinheiro em 50.\n";
-                echo "2- Não.\n";
-                $rifle = readline("Deseja comprar um Rifle: ");
-                switch ($rifle) {
-                    case '1':
-                        $personagem->setDinheiro($personagem->getDinheiro()-50);
-                        $personagem->setRifle(true);
-                        break;
-
-                    case '2':
-                        $personagem->setRifle(false);
-                        break;
-                    
-                    default:
-                        echo "Opção Invalida.\n";
-                        break;
-                }
-            } while ($rifle != '1' && $rifle != '2');
-
             return $personagem;
-        break;
-        
+
         case '2':
             $personagem = new Bandido();
             $personagem->setNome(readline("Informe o nome: "));
-            $personagem->setApelido(readline("Informe o Apelido: "));
             $personagem->setVida(100);
-            $personagem->setDano(10);
-            $personagem->setNivelProcurado(readline("Informe o Nivel de Matança: "));
-            $personagem->setDinheiro(100);
-            
-            do{
-                echo "1- Colt Single Action Army. \n";
-                echo "2- Remington Model. \n";
+
+            do {
+                echo "Escolha Uma Arma: \n";
+                echo "1- Colt Single Action Army (Dano: 15).\n";
+                echo "2- Remington Model (Dano: 12).\n";
 
                 $opcaoArma = readline("Informe uma Opção:");
 
-                switch ($opcaoArma){
+                switch ($opcaoArma) {
                     case '1':
                         $personagem->setArma("Colt Single Action Army");
                         break;
@@ -135,37 +108,15 @@ function selecionarPersonagem(){
                     case '2':
                         $personagem->setArma("Remington Model");
                         break;
-                
+
                     default:
                         echo "Opção Invalida! \n";
                         break;
                 }
-                
+
             } while ($opcaoArma != '1' && $opcaoArma != '2');
 
-            do {
-                echo "Você tem ". $personagem->getDinheiro() . " de Dinheiro.\n";
-                echo "1- Sim Voce Diminuira o seu Dinheiro em 20.\n";
-                echo "2- Não.\n";
-                $opcaoArmaBranca = readline("Deseja comprar uma Arma Branca: ");
-                switch ($opcaoArmaBranca) {
-                    case '1':
-                        $personagem->setDinheiro($personagem->getDinheiro()-20);
-                        $personagem->setArmaBranca(true);
-                        break;
-
-                    case '2':
-                        $personagem->setArmaBranca(false);
-                        break;
-                    
-                    default:
-                        echo "Opção Invalida.\n";
-                        break;
-                }
-            } while ($opcaoArmaBranca != '1' && $opcaoArmaBranca != '2');
-
             return $personagem;
-        break;
 
         default:
             echo "Opção inválida.\n";
@@ -173,32 +124,146 @@ function selecionarPersonagem(){
     }
 }
 
-function iniciar($arrayPersonagem){
+function iniciar($arrayPersonagem)
+{
+    system('clear');
     echo "----------------------------- \n";
 
-    foreach ($arrayPersonagem as $p){
-        echo $p->getNome() . "\n";
-        echo $p->getDano() . "\n";
-        echo $p->getArma() . "\n";
-        echo $p->getDinheiro() . "\n";
+    foreach ($arrayPersonagem as $p) {
 
         if ($p instanceof Procurador) {
-            echo $p->getHonra() . "\n";
-            echo ($p->isRifle() ? "Rifle: Sim \n" : "Rifle: Não \n");
+            echo "Classe: Procurador\n";
+            echo "Nome: " . $p->getNome() . "\n";
+            echo "Arma: " . $p->getArma() . "\n";
         } else if ($p instanceof Bandido) {
-            echo $p->getNivelProcurado() . "\n";
-            echo ($p->isArmaBranca() ? "Arma Branca: Sim \n" : "Arma Branca: Não \n");
+            echo "Classe: Bandido\n";
+            echo "Nome: " . $p->getNome() . "\n";
+            echo "Arma: " . $p->getArma() . "\n";
         }
 
         echo "----------------------------- \n";
     }
 
-    $variable = readline("Informe o índice do Personagem: ");
-    if (isset($arrayPersonagem[$variable])) {
-        $personagemEscolhido = $arrayPersonagem[$variable];
-        echo "Personagem escolhido: " . $personagemEscolhido->getNome() . "\n";
+    $p1 = readline("Informe o índice do primeiro personagem: ");
+    $p2 = readline("Informe o índice do segundo personagem: ");
+
+    if (isset($arrayPersonagem[$p1]) && isset($arrayPersonagem[$p2])) {
+
     } else {
         echo "Índice inválido!\n";
+        return;
     }
-    readline('Pressione Enter Para Continuar.');
+
+    $personagem1 = $arrayPersonagem[$p1];
+    $personagem2 = $arrayPersonagem[$p2];
+
+    sistemaBatalha($personagem1, $personagem2);
+
+}
+
+function sistemaBatalha($personagem1, $personagem2)
+{
+    system('clear');
+    echo "========================================\n";
+    echo "Batalha entre " . $personagem1->getNome() . " e " . $personagem2->getNome() . " começou!\n";
+    echo "========================================\n";
+    $pular = readline("Aperte Enter");
+
+    $turno = 1;
+    while ($personagem1->getVida() > 0 && $personagem2->getVida() > 0) {
+
+        system('clear');
+        echo "\n*** Turno $turno ***\n";
+        echo $personagem1->getNome() . ": " . $personagem1->getVida() . " HP\n";
+        echo $personagem2->getNome() . ": " . $personagem2->getVida() . " HP\n";
+
+        echo "\nEscolha quem será o atacante:\n";
+        echo "1- " . $personagem1->getNome() . "\n";
+        echo "2- " . $personagem2->getNome() . "\n";
+
+        $escolhaAtacante = readline("Informe a sua escolha: ");
+
+        if ($escolhaAtacante == 1) {
+            $atacante = $personagem1;
+            $defensor = $personagem2;
+        } else {
+            $atacante = $personagem2;
+            $defensor = $personagem1;
+        }
+
+        system('clear');
+        echo "\n" . $atacante->getNome() . " está atacando " . $defensor->getNome() . "!\n";
+        echo "Escolha o alvo:\n";
+        echo "1- Cabeça (Alto dano, baixa chance)\n";
+        echo "2- Torso (Dano médio, média chance)\n";
+        echo "3- Perna (Baixo dano, alta chance)\n";
+
+        $escolha = readline("Informe a sua escolha: ");
+        $resultado = executarAtaque($atacante, $defensor, $escolha);
+
+        echo $resultado . "\n";
+
+        if ($defensor->getVida() <= 0) {
+            system('clear');
+            echo "\n========================================\n";
+            echo $defensor->getNome() . " foi derrotado!\n";
+            echo $atacante->getNome() . " venceu a batalha!\n";
+            echo "========================================\n";
+            break;
+        }
+
+        $turno++;
+    }
+}
+
+function executarAtaque($atacante, $defensor, $escolha)
+{
+    $dano = 0;
+    $sorte = rand(1, 100);
+    $danoArma = obterDanoArma($atacante);
+
+    switch ($escolha) {
+        case '1':
+            if ($sorte <= 20) {
+                $dano = $danoArma * 10;
+                $defensor->setVida($defensor->getVida() - $dano);
+                return "Acertou a cabeça! Dano crítico: $dano";
+            } else {
+                return "Errou o tiro na cabeça!";
+            }
+
+        case '2':
+            if ($sorte <= 50) {
+                $dano = $danoArma * 2;
+                $defensor->setVida($defensor->getVida() - $dano);
+                return "Acertou o torso! Dano: $dano";
+            } else {
+                return "Errou o tiro no torso!";
+            }
+
+        case '3':
+            if ($sorte <= 90) {
+                $dano = $danoArma;
+                $defensor->setVida($defensor->getVida() - $dano);
+                return "Acertou a perna! Dano: $dano";
+            } else {
+                return "Errou o tiro na perna!";
+            }
+
+        default:
+            return "Escolha inválida, perdeu a vez!";
+    }
+}
+
+function obterDanoArma($personagem)
+{
+
+    switch ($personagem->getArma()) {
+        case "Colt Single Action Army":
+            return 15;
+        case "Remington Model":
+            return 12;
+        default:
+            return 10;
+    }
 }
