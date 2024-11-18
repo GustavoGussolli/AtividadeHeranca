@@ -11,6 +11,7 @@ function menu()
     $arrayPersonagem = array();
 
     do {
+        system('clear');
         echo "1- Criar Personagem.\n";
         echo "2- Iniciar.\n";
         echo "3- Creditos.\n";
@@ -216,8 +217,8 @@ function sistemaBatalha($personagem1, $personagem2)
     }
 }
 
-function executarAtaque($atacante, $defensor, $escolha)
-{
+function executarAtaque($atacante, $defensor, $escolha){
+    
     $dano = 0;
     $sorte = rand(1, 100);
     $danoArma = obterDanoArma($atacante);
@@ -227,32 +228,39 @@ function executarAtaque($atacante, $defensor, $escolha)
             if ($sorte <= 20) {
                 $dano = $danoArma * 10;
                 $defensor->setVida($defensor->getVida() - $dano);
-                return "Acertou a cabeça! Dano crítico: $dano";
+                echo "Acertou a cabeça! Dano crítico: $dano\n";
             } else {
-                return "Errou o tiro na cabeça!";
+                echo "Errou o tiro na cabeça!\n";
             }
+            break;
 
         case '2':
             if ($sorte <= 50) {
                 $dano = $danoArma * 2;
                 $defensor->setVida($defensor->getVida() - $dano);
-                return "Acertou o torso! Dano: $dano";
+                echo "Acertou o torso! Dano: $dano\n";
             } else {
-                return "Errou o tiro no torso!";
+                echo "Errou o tiro no torso!\n";
             }
+            break;
 
         case '3':
             if ($sorte <= 90) {
                 $dano = $danoArma;
                 $defensor->setVida($defensor->getVida() - $dano);
-                return "Acertou a perna! Dano: $dano";
+                echo "Acertou a perna! Dano: $dano\n";
             } else {
-                return "Errou o tiro na perna!";
+                echo "Errou o tiro na perna!\n";
             }
+            break;
 
         default:
-            return "Escolha inválida, perdeu a vez!";
+            echo "Escolha inválida, perdeu a vez!\n";
+            break;
     }
+
+    readline("Pressione Enter para continuar...");
+    return;
 }
 
 function obterDanoArma($personagem)
