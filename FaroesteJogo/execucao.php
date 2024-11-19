@@ -13,8 +13,9 @@ function menu()
     do {
         system('clear');
         echo "1- Criar Personagem.\n";
-        echo "2- Iniciar.\n";
-        echo "3- Creditos.\n";
+        echo "2- Deletar Personagem.\n";
+        echo "3- Iniciar.\n";
+        echo "4- Creditos.\n";
         echo "0- Sair.\n";
         $opcao = readline("Informe uma Opção:");
 
@@ -29,12 +30,26 @@ function menu()
                 break;
 
             case '2':
-                iniciar($arrayPersonagem);
+                system('clear');
+                mostrarDados($arrayPersonagem);
+
+                $excluir = readline("Informe qual personagem excluir: ");
+
+                if (isset($arrayPersonagem[$excluir]) == false) {
+                    echo "Índice inválido!\n";
+                    break;
+                } else {
+                    array_splice($arrayPersonagem, $excluir, 1);
+                }
                 break;
 
             case '3':
+                iniciar($arrayPersonagem);
+                break;
 
-                system('clear');
+            case '4':
+
+                system('cls');
                 echo "Feito por:\n";
                 echo "Gustavo Nascimento\n";
                 echo "Micael Menegassi Silva\n";
@@ -42,7 +57,7 @@ function menu()
                 break;
 
             default:
-                system('clear');
+                system('cls');
                 echo "Digite Uma Opção Valida!\n";
                 readline('Pressione Enter Para Continuar.');
                 break;
@@ -127,23 +142,8 @@ function criarPersonagem()
 
 function iniciar($arrayPersonagem)
 {
-    system('clear');
-    echo "----------------------------- \n";
-
-    foreach ($arrayPersonagem as $p) {
-
-        if ($p instanceof Procurador) {
-            echo "Classe: Procurador\n";
-            echo "Nome: " . $p->getNome() . "\n";
-            echo "Arma: " . $p->getArma() . "\n";
-        } else if ($p instanceof Bandido) {
-            echo "Classe: Bandido\n";
-            echo "Nome: " . $p->getNome() . "\n";
-            echo "Arma: " . $p->getArma() . "\n";
-        }
-
-        echo "----------------------------- \n";
-    }
+    system('cls');
+    mostrarDados($arrayPersonagem);
 
     $p1 = readline("Informe o índice do primeiro personagem: ");
     $p2 = readline("Informe o índice do segundo personagem: ");
@@ -164,7 +164,7 @@ function iniciar($arrayPersonagem)
 
 function sistemaBatalha($personagem1, $personagem2)
 {
-    system('clear');
+    system('cls');
     echo "========================================\n";
     echo "Batalha entre " . $personagem1->getNome() . " e " . $personagem2->getNome() . " começou!\n";
     echo "========================================\n";
@@ -173,7 +173,7 @@ function sistemaBatalha($personagem1, $personagem2)
     $turno = 1;
     while ($personagem1->getVida() > 0 && $personagem2->getVida() > 0) {
 
-        system('clear');
+        system('cls');
         echo "\n*** Turno $turno ***\n";
         echo $personagem1->getNome() . ": " . $personagem1->getVida() . " HP\n";
         echo $personagem2->getNome() . ": " . $personagem2->getVida() . " HP\n";
@@ -192,7 +192,7 @@ function sistemaBatalha($personagem1, $personagem2)
             $defensor = $personagem1;
         }
 
-        system('clear');
+        system('cls');
         echo "\n" . $atacante->getNome() . " está atacando " . $defensor->getNome() . "!\n";
         echo "Escolha o alvo:\n";
         echo "1- Cabeça (Alto dano, baixa chance)\n";
@@ -205,7 +205,7 @@ function sistemaBatalha($personagem1, $personagem2)
         echo $resultado . "\n";
 
         if ($defensor->getVida() <= 0) {
-            system('clear');
+            system('cls');
             echo "\n========================================\n";
             echo $defensor->getNome() . " foi derrotado!\n";
             echo $atacante->getNome() . " venceu a batalha!\n";
@@ -217,8 +217,9 @@ function sistemaBatalha($personagem1, $personagem2)
     }
 }
 
-function executarAtaque($atacante, $defensor, $escolha){
-    
+function executarAtaque($atacante, $defensor, $escolha)
+{
+
     $dano = 0;
     $sorte = rand(1, 100);
     $danoArma = obterDanoArma($atacante);
@@ -273,5 +274,24 @@ function obterDanoArma($personagem)
             return 12;
         default:
             return 10;
+    }
+}
+
+function mostrarDados($arrayPersonagem)
+{
+
+    foreach ($arrayPersonagem as $p) {
+
+        if ($p instanceof Procurador) {
+            echo "Classe: Procurador\n";
+            echo "Nome: " . $p->getNome() . "\n";
+            echo "Arma: " . $p->getArma() . "\n";
+        } else if ($p instanceof Bandido) {
+            echo "Classe: Bandido\n";
+            echo "Nome: " . $p->getNome() . "\n";
+            echo "Arma: " . $p->getArma() . "\n";
+        }
+
+        echo "----------------------------- \n";
     }
 }
