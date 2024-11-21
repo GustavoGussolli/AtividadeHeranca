@@ -33,7 +33,7 @@ function menu()
                 system('clear');
                 mostrarDados($arrayPersonagem);
 
-                $excluir = readline("Informe qual personagem excluir: ");
+                $excluir = readline("Informe o indice para excluir: ");
 
                 if (isset($arrayPersonagem[$excluir]) == false) {
                     echo "Índice inválido!\n";
