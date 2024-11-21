@@ -49,7 +49,7 @@ function menu()
 
             case '4':
 
-                system('cls');
+                system('clear');
                 echo "Feito por:\n";
                 echo "Gustavo Nascimento\n";
                 echo "Micael Menegassi Silva\n";
@@ -57,7 +57,7 @@ function menu()
                 break;
 
             default:
-                system('cls');
+                system('clear');
                 echo "Digite Uma Opção Valida!\n";
                 readline('Pressione Enter Para Continuar.');
                 break;
@@ -142,7 +142,7 @@ function criarPersonagem()
 
 function iniciar($arrayPersonagem)
 {
-    system('cls');
+    system('clear');
     mostrarDados($arrayPersonagem);
 
     $p1 = readline("Informe o índice do primeiro personagem: ");
@@ -164,7 +164,7 @@ function iniciar($arrayPersonagem)
 
 function sistemaBatalha($personagem1, $personagem2)
 {
-    system('cls');
+    system('clear');
     echo "========================================\n";
     echo "Batalha entre " . $personagem1->getNome() . " e " . $personagem2->getNome() . " começou!\n";
     echo "========================================\n";
@@ -173,7 +173,7 @@ function sistemaBatalha($personagem1, $personagem2)
     $turno = 1;
     while ($personagem1->getVida() > 0 && $personagem2->getVida() > 0) {
 
-        system('cls');
+        system('clear');
         echo "\n*** Turno $turno ***\n";
         echo $personagem1->getNome() . ": " . $personagem1->getVida() . " HP\n";
         echo $personagem2->getNome() . ": " . $personagem2->getVida() . " HP\n";
@@ -192,7 +192,7 @@ function sistemaBatalha($personagem1, $personagem2)
             $defensor = $personagem1;
         }
 
-        system('cls');
+        system('clear');
         echo "\n" . $atacante->getNome() . " está atacando " . $defensor->getNome() . "!\n";
         echo "Escolha o alvo:\n";
         echo "1- Cabeça (Alto dano, baixa chance)\n";
@@ -205,7 +205,7 @@ function sistemaBatalha($personagem1, $personagem2)
         echo $resultado . "\n";
 
         if ($defensor->getVida() <= 0) {
-            system('cls');
+            system('clear');
             echo "\n========================================\n";
             echo $defensor->getNome() . " foi derrotado!\n";
             echo $atacante->getNome() . " venceu a batalha!\n";
